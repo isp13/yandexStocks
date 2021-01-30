@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		80C7000225C59CED00215C90 /* TappableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7000125C59CED00215C90 /* TappableButton.swift */; };
+		80C7000525C59D4300215C90 /* BigAreaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7000425C59D4300215C90 /* BigAreaButton.swift */; };
 		80C7FF8225C54B8D00215C90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FF8125C54B8D00215C90 /* AppDelegate.swift */; };
 		80C7FF8425C54B8D00215C90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FF8325C54B8D00215C90 /* SceneDelegate.swift */; };
 		80C7FF8625C54B8D00215C90 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FF8525C54B8D00215C90 /* ViewController.swift */; };
@@ -17,10 +19,18 @@
 		80C7FFBE25C5692800215C90 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 80C7FFBD25C5692800215C90 /* SnapKit */; };
 		80C7FFC325C56A9300215C90 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 80C7FFC225C56A9300215C90 /* Then */; };
 		80C7FFC725C56AF100215C90 /* UIViewSnapKitExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FFC625C56AF100215C90 /* UIViewSnapKitExt.swift */; };
-		80C7FFCD25C57A2100215C90 /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FFCC25C57A2100215C90 /* APIModels.swift */; };
+		80C7FFCD25C57A2100215C90 /* BasicFinantialsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FFCC25C57A2100215C90 /* BasicFinantialsModel.swift */; };
+		80C7FFD125C57AD300215C90 /* BaseStocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FFD025C57AD300215C90 /* BaseStocksViewController.swift */; };
+		80C7FFD525C57BDF00215C90 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FFD425C57BDF00215C90 /* ChartView.swift */; };
+		80C7FFDA25C5842100215C90 /* StockPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FFD925C5842100215C90 /* StockPriceModel.swift */; };
+		80C7FFDD25C58AAF00215C90 /* CompanyProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FFDC25C58AAF00215C90 /* CompanyProfileModel.swift */; };
+		80C7FFE125C58D6C00215C90 /* UIImageViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FFE025C58D6C00215C90 /* UIImageViewExt.swift */; };
+		80C7FFFF25C59CBF00215C90 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FFFE25C59CBF00215C90 /* RoundedButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		80C7000125C59CED00215C90 /* TappableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableButton.swift; sourceTree = "<group>"; };
+		80C7000425C59D4300215C90 /* BigAreaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigAreaButton.swift; sourceTree = "<group>"; };
 		80C7FF7E25C54B8D00215C90 /* tinkoffStocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tinkoffStocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80C7FF8125C54B8D00215C90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		80C7FF8325C54B8D00215C90 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,7 +41,13 @@
 		80C7FF8F25C54B8E00215C90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80C7FFB125C54CBE00215C90 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		80C7FFC625C56AF100215C90 /* UIViewSnapKitExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewSnapKitExt.swift; sourceTree = "<group>"; };
-		80C7FFCC25C57A2100215C90 /* APIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModels.swift; sourceTree = "<group>"; };
+		80C7FFCC25C57A2100215C90 /* BasicFinantialsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicFinantialsModel.swift; sourceTree = "<group>"; };
+		80C7FFD025C57AD300215C90 /* BaseStocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStocksViewController.swift; sourceTree = "<group>"; };
+		80C7FFD425C57BDF00215C90 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		80C7FFD925C5842100215C90 /* StockPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockPriceModel.swift; sourceTree = "<group>"; };
+		80C7FFDC25C58AAF00215C90 /* CompanyProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyProfileModel.swift; sourceTree = "<group>"; };
+		80C7FFE025C58D6C00215C90 /* UIImageViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExt.swift; sourceTree = "<group>"; };
+		80C7FFFE25C59CBF00215C90 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +82,12 @@
 		80C7FF8025C54B8D00215C90 /* tinkoffStocks */ = {
 			isa = PBXGroup;
 			children = (
+				80C7FFD325C57BCA00215C90 /* Views */,
 				80C7FFC525C56ABB00215C90 /* Extensions */,
 				80C7FFB125C54CBE00215C90 /* ApiManager.swift */,
-				80C7FFCC25C57A2100215C90 /* APIModels.swift */,
+				80C7FFDC25C58AAF00215C90 /* CompanyProfileModel.swift */,
+				80C7FFD925C5842100215C90 /* StockPriceModel.swift */,
+				80C7FFCC25C57A2100215C90 /* BasicFinantialsModel.swift */,
 				80C7FFB925C5683200215C90 /* Modules */,
 				80C7FF8125C54B8D00215C90 /* AppDelegate.swift */,
 				80C7FF8325C54B8D00215C90 /* SceneDelegate.swift */,
@@ -84,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				80C7FF8525C54B8D00215C90 /* ViewController.swift */,
+				80C7FFD025C57AD300215C90 /* BaseStocksViewController.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -92,8 +112,20 @@
 			isa = PBXGroup;
 			children = (
 				80C7FFC625C56AF100215C90 /* UIViewSnapKitExt.swift */,
+				80C7FFE025C58D6C00215C90 /* UIImageViewExt.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		80C7FFD325C57BCA00215C90 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				80C7FFD425C57BDF00215C90 /* ChartView.swift */,
+				80C7FFFE25C59CBF00215C90 /* RoundedButton.swift */,
+				80C7000125C59CED00215C90 /* TappableButton.swift */,
+				80C7000425C59D4300215C90 /* BigAreaButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,12 +206,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80C7FFCD25C57A2100215C90 /* APIModels.swift in Sources */,
+				80C7FFD125C57AD300215C90 /* BaseStocksViewController.swift in Sources */,
+				80C7FFCD25C57A2100215C90 /* BasicFinantialsModel.swift in Sources */,
+				80C7FFDA25C5842100215C90 /* StockPriceModel.swift in Sources */,
 				80C7FFB225C54CBE00215C90 /* ApiManager.swift in Sources */,
 				80C7FF8625C54B8D00215C90 /* ViewController.swift in Sources */,
+				80C7FFDD25C58AAF00215C90 /* CompanyProfileModel.swift in Sources */,
 				80C7FFC725C56AF100215C90 /* UIViewSnapKitExt.swift in Sources */,
+				80C7000525C59D4300215C90 /* BigAreaButton.swift in Sources */,
+				80C7000225C59CED00215C90 /* TappableButton.swift in Sources */,
+				80C7FFFF25C59CBF00215C90 /* RoundedButton.swift in Sources */,
 				80C7FF8225C54B8D00215C90 /* AppDelegate.swift in Sources */,
 				80C7FF8425C54B8D00215C90 /* SceneDelegate.swift in Sources */,
+				80C7FFE125C58D6C00215C90 /* UIImageViewExt.swift in Sources */,
+				80C7FFD525C57BDF00215C90 /* ChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
