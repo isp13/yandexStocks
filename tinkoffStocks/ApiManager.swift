@@ -46,6 +46,11 @@ class APIManager {
                 
                 let session = URLSession.shared
                 session.dataTask(with: request) { (data, response, error) in
+                    if (modelType == CompanyProfile.self) {
+                        print(data)
+                    print(response)
+                        print(error)
+                    }
                     if let error = error {
                         completion(.failure(error))
                     } else {
