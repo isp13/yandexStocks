@@ -14,10 +14,10 @@
 		80C7FF8B25C54B8E00215C90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80C7FF8A25C54B8E00215C90 /* Assets.xcassets */; };
 		80C7FF8E25C54B8E00215C90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80C7FF8C25C54B8E00215C90 /* LaunchScreen.storyboard */; };
 		80C7FFB225C54CBE00215C90 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FFB125C54CBE00215C90 /* ApiManager.swift */; };
-		80C7FFB625C551E300215C90 /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FFB525C551E300215C90 /* APIModels.swift */; };
 		80C7FFBE25C5692800215C90 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 80C7FFBD25C5692800215C90 /* SnapKit */; };
 		80C7FFC325C56A9300215C90 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 80C7FFC225C56A9300215C90 /* Then */; };
 		80C7FFC725C56AF100215C90 /* UIViewSnapKitExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FFC625C56AF100215C90 /* UIViewSnapKitExt.swift */; };
+		80C7FFCD25C57A2100215C90 /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FFCC25C57A2100215C90 /* APIModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +30,8 @@
 		80C7FF8D25C54B8E00215C90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		80C7FF8F25C54B8E00215C90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80C7FFB125C54CBE00215C90 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
-		80C7FFB525C551E300215C90 /* APIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModels.swift; sourceTree = "<group>"; };
 		80C7FFC625C56AF100215C90 /* UIViewSnapKitExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewSnapKitExt.swift; sourceTree = "<group>"; };
+		80C7FFCC25C57A2100215C90 /* APIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +68,7 @@
 			children = (
 				80C7FFC525C56ABB00215C90 /* Extensions */,
 				80C7FFB125C54CBE00215C90 /* ApiManager.swift */,
-				80C7FFB525C551E300215C90 /* APIModels.swift */,
+				80C7FFCC25C57A2100215C90 /* APIModels.swift */,
 				80C7FFB925C5683200215C90 /* Modules */,
 				80C7FF8125C54B8D00215C90 /* AppDelegate.swift */,
 				80C7FF8325C54B8D00215C90 /* SceneDelegate.swift */,
@@ -174,8 +174,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80C7FFCD25C57A2100215C90 /* APIModels.swift in Sources */,
 				80C7FFB225C54CBE00215C90 /* ApiManager.swift in Sources */,
-				80C7FFB625C551E300215C90 /* APIModels.swift in Sources */,
 				80C7FF8625C54B8D00215C90 /* ViewController.swift in Sources */,
 				80C7FFC725C56AF100215C90 /* UIViewSnapKitExt.swift in Sources */,
 				80C7FF8225C54B8D00215C90 /* AppDelegate.swift in Sources */,

@@ -50,6 +50,8 @@ class APIManager {
                         completion(.failure(error))
                     } else {
                         let datastring = String(bytes: data!, encoding: String.Encoding.utf8)
+                        print(datastring)
+                        print("\n\n\n\n\n\n\n")
                         completion( Result { try JSONDecoder().decode(T.self, from: data!)})
                     }
                 }.resume()

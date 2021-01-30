@@ -13,14 +13,15 @@ import Foundation
 struct BasicFinantials: Codable {
     let series: Series
     let metric: Metric?
+    let metricType: String?
+    let symbol: String?
 }
 
 // MARK: - Series
 struct Series: Codable {
     let annual: Annual
     
-    let metricType: String?
-    let symbol: String?
+    
 }
 
 // MARK: - Annual
