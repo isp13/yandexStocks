@@ -1,4 +1,13 @@
 //
+//  NewsViewController.swift
+//  tinkoffStocks
+//
+//  Created by Никита Казанцев on 30.01.2021.
+//
+
+import UIKit
+import SafariServices
+//
 //  ViewController.swift
 //  tinkoffStocks
 //
@@ -10,21 +19,15 @@ import SnapKit
 import Then
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
+class NewsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
 
     // MARK: - UI
     var activityView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     
-    private var myArray: [CompanyShortElement] = [CompanyShortElement(currency: "US", someDescription: "Apple inc", displaySymbol: "AAPL", figi: "BBG000BGHYF2", mic: "OTCM", symbol: "AAPL", type: "Common Stock"),
-                                                  CompanyShortElement(currency: "US", someDescription: "Microsoft Corporation", displaySymbol: "MSFT", figi: "BBG1654BGHYS2", mic: "OTCM", symbol: "MSFT", type: "Common Stock"),
-                                                  CompanyShortElement(currency: "US", someDescription: "Tesla Inc", displaySymbol: "TSLA", figi: "BBG001BGHYF2", mic: "OTCM", symbol: "TSLA", type: "Common Stock"),
-                                                  CompanyShortElement(currency: "US", someDescription: "Macy's Inc", displaySymbol: "M", figi: "BBG001BGHYF6", mic: "OTCM", symbol: "M", type: "Common Stock"),
-                                                  CompanyShortElement(currency: "US", someDescription: "Zoom Video Communications Inc", displaySymbol: "ZM", figi: "BBG001BGHYF3", mic: "OTCM", symbol: "ZM", type: "Common Stock"),
-                                                  CompanyShortElement(currency: "US", someDescription: "Activision Blizzard, Inc.", displaySymbol: "ATVI", figi: "BBG001BGHYF3", mic: "OTCM", symbol: "ATVI", type: "Common Stock"),
-                                                  ]
+    private var myArray: [NewsElement] = []
     
 
-    private var filteredData: [CompanyShortElement]!
+    private var filteredData: [NewsElement]!
     private var myTableView: UITableView!
     
     var searchBar: UISearchBar! = UISearchBar()
@@ -37,11 +40,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 overrideUserInterfaceStyle = .dark
             }
         
-        self.title = "Stocks"
+        self.title = "News"
         
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationController?.hidesBarsOnSwipe = true
-        let loadMoreItem = UIBarButtonItem(title: "Load more", style: .plain, target: self, action: #selector(loadMore))
+        let loadMoreItem = UIBarButtonItem(title: "Reload", style: .plain, target: self, action: #selector(loadMore))
         navigationItem.rightBarButtonItems = [loadMoreItem]
         filteredData = myArray
 
@@ -54,6 +57,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         activityView.center = self.view.center
         self.view.addSubview(activityView)
         
+        loadMore()
+        
     }
     
     func setupTableView() {
@@ -64,8 +69,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let displayHeight: CGFloat = self.view.frame.height
 
         myTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
-        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "subtitleCell")
-        
+        myTableView.register(NewsCell.self, forCellReuseIdentifier: "subtitleCell")
+       
         myTableView.dataSource = self
         myTableView.delegate = self
         
@@ -94,15 +99,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     
     
-    func loadCompanies() {
-        APIManager.sharedInstance.getRequest(modelType: CompanyShort.self, url: "https://finnhub.io/api/v1/stock/symbol?exchange=US&token=\(APIManager.sharedInstance.apiKey)") { result in
+    func loadNews() {
+        APIManager.sharedInstance.getRequest(modelType: [NewsElement].self, url: "https://finnhub.io/api/v1/news?category=general&token=\(APIManager.sharedInstance.apiKey)") { result in
             switch result {
             case .success(let data):
                 do {
                     DispatchQueue.main.async {
                         self.activityView.stopAnimating()
                     self.myArray = data.sorted {
-                        String($0.displaySymbol ?? "ZZ") < String($1.displaySymbol ?? "ZZ")
+                        String($0.headline ?? "ZZ") < String($1.headline ?? "ZZ")
                       }
                         
                         self.filteredData = self.myArray
@@ -121,15 +126,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @objc func loadMore() {
         activityView.startAnimating()
-        loadCompanies()
+        loadNews()
       }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
-        if (myArray[indexPath.row].symbol != nil) {
-            //myArray[indexPath.row].symbol!
-            self.present(DetailedViewController(companySymbol: filteredData[indexPath.row].symbol!, companyName: filteredData[indexPath.row].someDescription ?? ""), animated: true, completion: nil)
+        if (self.filteredData[indexPath.row].url != nil) {
+        let svc = SFSafariViewController(url: URL(string: self.filteredData[indexPath.row].url!)!)
+        present(svc, animated: true, completion: nil)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 360
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -137,26 +145,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "subtitleCell", for: indexPath as IndexPath)
-        
-        cell = UITableViewCell(style: .subtitle, reuseIdentifier: "subtitleCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "subtitleCell", for: indexPath) as! NewsCell
         cell.selectionStyle = .none
-        cell.backgroundColor = .black
-        cell.textLabel!.text = "\(self.filteredData[indexPath.row].displaySymbol!)"
         
-        if (self.filteredData[indexPath.row].someDescription != nil ) {
-        cell.detailTextLabel!.text = "\(self.filteredData[indexPath.row].someDescription!)"
-            cell.detailTextLabel!.textColor = .lightGray
-            
-            
-        }
-        cell.textLabel!.textColor = .white
+        cell.NameLabel.text = self.filteredData[indexPath.row].headline
+        cell.smallLabel.text = self.filteredData[indexPath.row].category
+        cell.loadImage(url: self.filteredData[indexPath.row].image!)
         return cell
     }
     
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.filteredData = self.myArray.filter({ $0.someDescription?.lowercased().hasPrefix(searchText.lowercased()) ?? false })
+        self.filteredData = self.myArray.filter({ $0.headline?.lowercased().hasPrefix(searchText.lowercased()) ?? false })
         //change the condition as per your requirement......
         self.myTableView.reloadData()
     }

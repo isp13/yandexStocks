@@ -9,11 +9,16 @@ import UIKit
 import SnapKit
 
 public extension UIView {
+    
+    var safeArea : ConstraintLayoutGuideDSL {
+        return safeAreaLayoutGuide.snp
+    }
 
     func addSubview(_ subview: UIView, makeConstraints: (ConstraintMaker) -> Void) {
         addSubview(subview)
         subview.snp.makeConstraints { makeConstraints($0) }
     }
+       
 }
 
 public extension UIViewController {

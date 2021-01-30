@@ -132,6 +132,11 @@ class DetailedViewController: BaseStocksViewController {
         }
         
         
+        let add = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(close))
+
+        navigationItem.rightBarButtonItems = [add]
+        
+        
         
     }
     
@@ -147,7 +152,7 @@ class DetailedViewController: BaseStocksViewController {
             uiimageview.clipsToBounds = true
             
             addSubview(uiimageview) {
-                $0.topMargin.equalToSuperview().offset(16)
+                $0.topMargin.equalToSuperview().offset(32)
                 $0.left.equalToSuperview().offset(16)
                 $0.width.height.equalTo(32)
             }
@@ -269,6 +274,10 @@ class DetailedViewController: BaseStocksViewController {
             self.dataStackView.spacing = 30
             self.dataStackView.axis = .vertical
             for (key,value) in data.allProperties() {
+                
+                if (key == "logo") {
+                    continue
+                }
                 print(key,value)
                 let newView = UIView()
                 let newLabel = UILabel() // main label
@@ -284,7 +293,8 @@ class DetailedViewController: BaseStocksViewController {
                     if let bb = value as? [String: Double] {
                         newLabel2.text = String(bb["some"]!)
                     } else {
-                        newLabel2.text = "-"
+                        continue
+                        //newLabel2.text = "-"
                     }
                 }
                 
@@ -439,6 +449,10 @@ class DetailedViewController: BaseStocksViewController {
             self.priceHighLabel.text = String(data.metric?.the52WeekHigh ?? 0)
         }
     }
+    
+    @objc func close() {
+        self.dismiss(animated: true, completion: nil)
+      }
 }
 
 

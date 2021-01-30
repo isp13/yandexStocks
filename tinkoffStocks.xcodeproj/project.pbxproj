@@ -11,6 +11,9 @@
 		80C7000525C59D4300215C90 /* BigAreaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7000425C59D4300215C90 /* BigAreaButton.swift */; };
 		80C7000D25C59F7F00215C90 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7000C25C59F7F00215C90 /* ViewController.swift */; };
 		80C7001525C5A89600215C90 /* CompanyShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7001425C5A89600215C90 /* CompanyShortModel.swift */; };
+		80C7001B25C5E56100215C90 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7001A25C5E56100215C90 /* NewsModel.swift */; };
+		80C7002025C5E6B100215C90 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7001F25C5E6B100215C90 /* NewsViewController.swift */; };
+		80C7002325C5EA8D00215C90 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7002225C5EA8D00215C90 /* NewsCell.swift */; };
 		80C7FF8225C54B8D00215C90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FF8125C54B8D00215C90 /* AppDelegate.swift */; };
 		80C7FF8425C54B8D00215C90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FF8325C54B8D00215C90 /* SceneDelegate.swift */; };
 		80C7FF8625C54B8D00215C90 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FF8525C54B8D00215C90 /* DetailedViewController.swift */; };
@@ -35,6 +38,9 @@
 		80C7000425C59D4300215C90 /* BigAreaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigAreaButton.swift; sourceTree = "<group>"; };
 		80C7000C25C59F7F00215C90 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		80C7001425C5A89600215C90 /* CompanyShortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyShortModel.swift; sourceTree = "<group>"; };
+		80C7001A25C5E56100215C90 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		80C7001F25C5E6B100215C90 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		80C7002225C5EA8D00215C90 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		80C7FF7E25C54B8D00215C90 /* tinkoffStocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tinkoffStocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80C7FF8125C54B8D00215C90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		80C7FF8325C54B8D00215C90 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +73,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		80C7001925C5E54C00215C90 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				80C7FFCC25C57A2100215C90 /* BasicFinantialsModel.swift */,
+				80C7001425C5A89600215C90 /* CompanyShortModel.swift */,
+				80C7FFD925C5842100215C90 /* StockPriceModel.swift */,
+				80C7FFDC25C58AAF00215C90 /* CompanyProfileModel.swift */,
+				80C7001A25C5E56100215C90 /* NewsModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		80C7FF7525C54B8D00215C90 = {
 			isa = PBXGroup;
 			children = (
@@ -86,13 +104,10 @@
 		80C7FF8025C54B8D00215C90 /* tinkoffStocks */ = {
 			isa = PBXGroup;
 			children = (
+				80C7FFB125C54CBE00215C90 /* ApiManager.swift */,
+				80C7001925C5E54C00215C90 /* Models */,
 				80C7FFD325C57BCA00215C90 /* Views */,
 				80C7FFC525C56ABB00215C90 /* Extensions */,
-				80C7FFB125C54CBE00215C90 /* ApiManager.swift */,
-				80C7FFDC25C58AAF00215C90 /* CompanyProfileModel.swift */,
-				80C7001425C5A89600215C90 /* CompanyShortModel.swift */,
-				80C7FFD925C5842100215C90 /* StockPriceModel.swift */,
-				80C7FFCC25C57A2100215C90 /* BasicFinantialsModel.swift */,
 				80C7FFB925C5683200215C90 /* Modules */,
 				80C7FF8125C54B8D00215C90 /* AppDelegate.swift */,
 				80C7FF8325C54B8D00215C90 /* SceneDelegate.swift */,
@@ -110,6 +125,8 @@
 				80C7FF8525C54B8D00215C90 /* DetailedViewController.swift */,
 				80C7FFD025C57AD300215C90 /* BaseStocksViewController.swift */,
 				80C7000C25C59F7F00215C90 /* ViewController.swift */,
+				80C7001F25C5E6B100215C90 /* NewsViewController.swift */,
+				80C7002225C5EA8D00215C90 /* NewsCell.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -223,9 +240,12 @@
 				80C7000525C59D4300215C90 /* BigAreaButton.swift in Sources */,
 				80C7000225C59CED00215C90 /* TappableButton.swift in Sources */,
 				80C7001525C5A89600215C90 /* CompanyShortModel.swift in Sources */,
+				80C7002325C5EA8D00215C90 /* NewsCell.swift in Sources */,
 				80C7FFFF25C59CBF00215C90 /* RoundedButton.swift in Sources */,
 				80C7FF8225C54B8D00215C90 /* AppDelegate.swift in Sources */,
+				80C7001B25C5E56100215C90 /* NewsModel.swift in Sources */,
 				80C7FF8425C54B8D00215C90 /* SceneDelegate.swift in Sources */,
+				80C7002025C5E6B100215C90 /* NewsViewController.swift in Sources */,
 				80C7FFE125C58D6C00215C90 /* UIImageViewExt.swift in Sources */,
 				80C7FFD525C57BDF00215C90 /* ChartView.swift in Sources */,
 			);
