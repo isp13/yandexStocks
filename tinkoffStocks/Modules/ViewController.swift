@@ -54,6 +54,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         activityView.center = self.view.center
         self.view.addSubview(activityView)
         
+        let tapOnScreen = UITapGestureRecognizer(target: self, action: #selector(closeEvent))
+        tapOnScreen.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapOnScreen)
     }
     
     func setupTableView() {
@@ -123,6 +126,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         activityView.startAnimating()
         loadCompanies()
       }
+    
+    @objc private func closeEvent() {
+        view.endEditing(true)
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //

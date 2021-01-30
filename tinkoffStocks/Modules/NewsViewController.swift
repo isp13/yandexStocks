@@ -59,6 +59,10 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         loadMore()
         
+        let tapOnScreen = UITapGestureRecognizer(target: self, action: #selector(closeEvent))
+        tapOnScreen.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapOnScreen)
+        
     }
     
     func setupTableView() {
@@ -128,6 +132,10 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         activityView.startAnimating()
         loadNews()
       }
+    
+    @objc private func closeEvent() {
+        view.endEditing(true)
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (self.filteredData[indexPath.row].url != nil) {
