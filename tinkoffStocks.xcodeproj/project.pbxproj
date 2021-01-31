@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		80BC0A7625C6A0EA002728EA /* DateTimeExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC0A7525C6A0EA002728EA /* DateTimeExt.swift */; };
+		80BC0A7A25C6B43B002728EA /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 80BC0A7925C6B43B002728EA /* Realm */; };
+		80BC0A7C25C6B43B002728EA /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 80BC0A7B25C6B43B002728EA /* RealmSwift */; };
+		80BC0A7F25C6B59A002728EA /* StockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC0A7E25C6B59A002728EA /* StockCell.swift */; };
 		80C7000225C59CED00215C90 /* TappableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7000125C59CED00215C90 /* TappableButton.swift */; };
 		80C7000525C59D4300215C90 /* BigAreaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7000425C59D4300215C90 /* BigAreaButton.swift */; };
 		80C7000D25C59F7F00215C90 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7000C25C59F7F00215C90 /* ViewController.swift */; };
@@ -36,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		80BC0A7525C6A0EA002728EA /* DateTimeExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeExt.swift; sourceTree = "<group>"; };
+		80BC0A7E25C6B59A002728EA /* StockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCell.swift; sourceTree = "<group>"; };
 		80C7000125C59CED00215C90 /* TappableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableButton.swift; sourceTree = "<group>"; };
 		80C7000425C59D4300215C90 /* BigAreaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigAreaButton.swift; sourceTree = "<group>"; };
 		80C7000C25C59F7F00215C90 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80BC0A7C25C6B43B002728EA /* RealmSwift in Frameworks */,
+				80BC0A7A25C6B43B002728EA /* Realm in Frameworks */,
 				80C7FFBE25C5692800215C90 /* SnapKit in Frameworks */,
 				80C7FFC325C56A9300215C90 /* Then in Frameworks */,
 			);
@@ -102,6 +108,7 @@
 			children = (
 				80C7000C25C59F7F00215C90 /* ViewController.swift */,
 				80C7FF8525C54B8D00215C90 /* DetailedViewController.swift */,
+				80BC0A7E25C6B59A002728EA /* StockCell.swift */,
 			);
 			path = StockSearch;
 			sourceTree = "<group>";
@@ -197,6 +204,8 @@
 			packageProductDependencies = (
 				80C7FFBD25C5692800215C90 /* SnapKit */,
 				80C7FFC225C56A9300215C90 /* Then */,
+				80BC0A7925C6B43B002728EA /* Realm */,
+				80BC0A7B25C6B43B002728EA /* RealmSwift */,
 			);
 			productName = tinkoffStocks;
 			productReference = 80C7FF7E25C54B8D00215C90 /* tinkoffStocks.app */;
@@ -228,6 +237,7 @@
 			packageReferences = (
 				80C7FFBC25C5692800215C90 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				80C7FFC125C56A9300215C90 /* XCRemoteSwiftPackageReference "Then" */,
+				80BC0A7825C6B43B002728EA /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 80C7FF7F25C54B8D00215C90 /* Products */;
 			projectDirPath = "";
@@ -258,6 +268,7 @@
 			files = (
 				80C7000D25C59F7F00215C90 /* ViewController.swift in Sources */,
 				80C7FFD125C57AD300215C90 /* BaseStocksViewController.swift in Sources */,
+				80BC0A7F25C6B59A002728EA /* StockCell.swift in Sources */,
 				80C7FFCD25C57A2100215C90 /* BasicFinantialsModel.swift in Sources */,
 				80C7FFDA25C5842100215C90 /* StockPriceModel.swift in Sources */,
 				80C7FFB225C54CBE00215C90 /* ApiManager.swift in Sources */,
@@ -479,6 +490,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		80BC0A7825C6B43B002728EA /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.5.1;
+			};
+		};
 		80C7FFBC25C5692800215C90 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -498,6 +517,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		80BC0A7925C6B43B002728EA /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 80BC0A7825C6B43B002728EA /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		80BC0A7B25C6B43B002728EA /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 80BC0A7825C6B43B002728EA /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
 		80C7FFBD25C5692800215C90 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 80C7FFBC25C5692800215C90 /* XCRemoteSwiftPackageReference "SnapKit" */;

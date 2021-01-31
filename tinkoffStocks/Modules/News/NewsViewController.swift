@@ -4,20 +4,11 @@
 //
 //  Created by Никита Казанцев on 30.01.2021.
 //
-
-import UIKit
-import SafariServices
-//
-//  ViewController.swift
-//  tinkoffStocks
-//
-//  Created by Никита Казанцев on 30.01.2021.
-//
-
+// контроллер с таблицей где выводятся новости как-то связанные с рынком акций (влияющих на них косвенно или прямо)
 import UIKit
 import SnapKit
 import Then
-import UIKit
+import SafariServices
 
 class NewsViewController: BaseStocksViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
 
@@ -34,17 +25,9 @@ class NewsViewController: BaseStocksViewController, UITableViewDelegate, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setupNavigationBar()
         
-        if #available(iOS 13.0, *) {
-                overrideUserInterfaceStyle = .dark
-            }
-        
-        self.title = "News"
-        
-        self.navigationController?.navigationBar.prefersLargeTitles = false
-        self.navigationController?.hidesBarsOnSwipe = true
-        let loadMoreItem = UIBarButtonItem(title: "Reload", style: .plain, target: self, action: #selector(loadMore))
-        navigationItem.rightBarButtonItems = [loadMoreItem]
         filteredData = myArray
 
         setupSearchBar()
@@ -73,13 +56,22 @@ class NewsViewController: BaseStocksViewController, UITableViewDelegate, UITable
        
         myTableView.dataSource = self
         myTableView.delegate = self
-        
+        myTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         myTableView.backgroundColor = .black
         
         self.view.addSubview(myTableView) {
             $0.right.bottom.left.equalToSuperview()
             $0.top.equalTo(searchBar.snp.bottom)
           }
+    }
+    
+    func setupNavigationBar() {
+        self.title = "News"
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationController?.hidesBarsOnSwipe = true
+        let loadMoreItem = UIBarButtonItem(title: "Reload", style: .plain, target: self, action: #selector(loadMore))
+        navigationItem.rightBarButtonItems = [loadMoreItem]
     }
     
     func setupSearchBar() {
@@ -96,6 +88,9 @@ class NewsViewController: BaseStocksViewController, UITableViewDelegate, UITable
     }
     
 
+    /**
+     загружает новости с бэка
+     */
     func loadNews() {
         APIManager.sharedInstance.getRequest(modelType: [NewsElement].self, url: "https://finnhub.io/api/v1/news?category=general&token=\(APIManager.sharedInstance.apiKey)") { result in
             switch result {

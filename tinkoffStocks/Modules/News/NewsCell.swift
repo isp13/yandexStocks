@@ -4,7 +4,8 @@
 //
 //  Created by Никита Казанцев on 30.01.2021.
 //
-
+// Ячейка, использующаяся в при выводе новостей
+// вывод названия новости, картинки
 
 
 import UIKit
@@ -83,6 +84,11 @@ class NewsCell: UITableViewCell {
         }
     }
     
+    /**
+     загружает фото по ссылке
+
+     - url: по какому url грузить изображение.
+     */
     func loadImage(url: String) {
         DispatchQueue.main.async {
             self.Iconimage.loadImageUsingCacheWithURLString(url, placeHolder: UIImage())

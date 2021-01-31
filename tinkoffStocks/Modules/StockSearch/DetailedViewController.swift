@@ -4,6 +4,7 @@
 //
 //  Created by Никита Казанцев on 30.01.2021.
 //
+// Детальное описание акции с выводом графика и кучей информации в виде лейблов
 
 import UIKit
 import SwiftUI
@@ -165,7 +166,9 @@ class DetailedViewController: BaseStocksViewController {
         }
     }
     
-    // секция, где отображаются минимумы-максимумы за 52 недели (так принято)
+    /**
+ секция, где отображаются минимумы-максимумы за 52 недели (так принято)
+ */
     func addLowHigh52SectionView() {
         lowHighSection = UIView()
         lowSection = UIView()
@@ -233,7 +236,11 @@ class DetailedViewController: BaseStocksViewController {
         }
     }
     
-    // вывод подробной информации о компании
+    /**
+     вывод в UI подробной информации о компании
+
+     - Parameter data: объект структуры компании
+     */
     func addDataStackView(_ data: CompanyProfile) {
         DispatchQueue.main.async {
             self.dataStackView.spacing = 30
@@ -357,9 +364,11 @@ class DetailedViewController: BaseStocksViewController {
     }
     
     
-    
-    /// make a request to server to get metric
-    /// - Parameter company: which company metrics need to request
+    /**
+     собираем метрику компании с бэка
+
+     - Parameter company: какую компанию нужно проанализировать.
+     */
     private func requestCompany(for company: String) {
         APIManager.sharedInstance.getRequest(modelType: BasicFinantials.self, url: "https://finnhub.io/api/v1/stock/metric?symbol=\(company)&metric=all&token=\(APIManager.sharedInstance.apiKey)") { result in
             switch result {
@@ -403,6 +412,12 @@ class DetailedViewController: BaseStocksViewController {
         }
     }
     
+    
+    /**
+     выводит график на экран если он доступен
+
+     - Parameter data: данные о цене акции за все время.
+     */
     private func loadChart(_ data: StockPrice) {
         DispatchQueue.main.async {
             if (data.c != nil ) {

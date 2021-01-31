@@ -4,7 +4,7 @@
 //
 //  Created by Никита Казанцев on 30.01.2021.
 //
-
+// класс родителель для общих настроек контроллеров
 
 
 import UIKit
@@ -24,6 +24,9 @@ class BaseStocksViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if #available(iOS 13.0, *) {
+                overrideUserInterfaceStyle = .dark
+            }
         // colors
         view.backgroundColor = .black
 

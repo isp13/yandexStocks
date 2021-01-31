@@ -23,6 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        window?.rootViewController = navViewController
         
         let tabBarController = UITabBarController()
+        
+        if #available(iOS 13.0, *) {
+            tabBarController.overrideUserInterfaceStyle = .dark
+            }
                 
                 let firstTabNavigationController = UINavigationController.init(rootViewController: ViewController())
                 let secondTabNavigationControoller = UINavigationController.init(rootViewController: NewsViewController())
