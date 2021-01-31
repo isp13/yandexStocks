@@ -59,7 +59,7 @@ class ViewController: BaseStocksViewController, UITableViewDelegate, UITableView
     }
     
     func setupTableView() {
-        let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
+        let barHeight: CGFloat = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
 

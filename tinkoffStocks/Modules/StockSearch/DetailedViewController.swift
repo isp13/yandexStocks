@@ -329,12 +329,12 @@ class DetailedViewController: BaseStocksViewController {
             
             nextButton.setTitle("Add to favourite", for: .normal)
             nextButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .regular)
-            nextButton.onTap { [unowned self] _ in
-                DispatchQueue.main.async {
-                    
-                }
-                
-            }
+//            nextButton.onTap { [unowned self] _ in
+//                DispatchQueue.main.async {
+//                    
+//                }
+//                
+//            }
             
             addSubview(nextButton) {
                 $0.height.equalTo(55)
