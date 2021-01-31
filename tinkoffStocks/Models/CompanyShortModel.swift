@@ -4,6 +4,8 @@
 //
 //  Created by Никита Казанцев on 30.01.2021.
 //
+// Общие данные о компании, приходят с https://finnhub.io
+// Больше информации https://finnhub.io/docs/api/stock-symbols
 
 import Foundation
 

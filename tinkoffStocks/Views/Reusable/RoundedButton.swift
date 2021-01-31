@@ -45,7 +45,6 @@ class RoundedButton: TappableButton {
     private func setupUI() {
 
         // font
-        
         setTitleColor(.black, for: .normal)
         backgroundColor = .lightGray
         titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)

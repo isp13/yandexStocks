@@ -19,7 +19,7 @@ import SnapKit
 import Then
 import UIKit
 
-class NewsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
+class NewsViewController: BaseStocksViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
 
     // MARK: - UI
     var activityView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
@@ -36,7 +36,6 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         if #available(iOS 13.0, *) {
-                // Always adopt a light interface style.
                 overrideUserInterfaceStyle = .dark
             }
         
@@ -48,8 +47,6 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationItem.rightBarButtonItems = [loadMoreItem]
         filteredData = myArray
 
-        //setupTopView()
-        
         setupSearchBar()
         
         setupTableView()
@@ -66,7 +63,6 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func setupTableView() {
-        
         
         let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         let displayWidth: CGFloat = self.view.frame.width
@@ -96,13 +92,10 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         addSubview(searchBar) {
             $0.right.left.equalToSuperview()
             $0.top.equalTo(view.safeArea.top).offset(16)
-            //$0.bottom.equalToSuperview().inset(self.view.frame.height - 150)
         }
     }
     
 
-    
-    
     func loadNews() {
         APIManager.sharedInstance.getRequest(modelType: [NewsElement].self, url: "https://finnhub.io/api/v1/news?category=general&token=\(APIManager.sharedInstance.apiKey)") { result in
             switch result {
@@ -121,6 +114,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
             case .failure(let error):
                 do {
                     DispatchQueue.main.async {
+                        self.showError(error.localizedDescription)
                         self.activityView.stopAnimating()
                     }
                 }

@@ -4,6 +4,7 @@
 //
 //  Created by Никита Казанцев on 30.01.2021.
 //
+// Вью с графиком, который строится по осям ОХ ОУ, где ОХ - порядковый номер соответствующего элемента, а ОУ - value этого значения
 
 
 import SwiftUI
@@ -25,6 +26,8 @@ struct LineView: View {
     public var body: some View {
         GeometryReader{ geometry in
             VStack(alignment: .leading, spacing: 8) {
+                
+                // верхний лейбл с текстом
                 Group{
                     if (self.title != nil){
                         Text(self.title!)
@@ -36,7 +39,9 @@ struct LineView: View {
                         .offset(x: 5, y: 0)
                     }
                 }.offset(x: 0, y: 0)
-                ZStack{
+                
+                // сам график линейный
+                ZStack(alignment: .bottomTrailing){
                     GeometryReader{ reader in
                         Line(data: self.data,
                              frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width , height: reader.frame(in: .local).height))
@@ -45,6 +50,37 @@ struct LineView: View {
                     }
                     .frame(width: geometry.frame(in: .local).size.width, height: 200)
                     .offset(x: 0, y: -100)
+                    
+                    
+                    // нижняя полоска оси ОХ
+                    HStack {
+                        
+                        // левая часть, выводит дату начала отсчета
+                        VStack(alignment: .leading) {
+                            Rectangle()
+                                .accentColor(Color(UIColor.lightGray))
+                                .frame(width: 1, height: 2)
+                                .opacity(0.7)
+                            
+                        Text(UTCtoClockTimeOnly(currentDate: Calendar.current.date(byAdding: .day, value: -365, to: Date())!, format: "MM.YYYY"))
+                            .font(.caption)
+                            .foregroundColor(Color(UIColor.lightGray))
+                        }
+                        
+                        Spacer()
+                        
+                        // правая часть, выводит дату конца отсчета
+                        VStack(alignment: .trailing) {
+                            Rectangle()
+                                .accentColor(Color(UIColor.lightGray))
+                                .frame(width: 1, height: 2)
+                                .opacity(0.5)
+                            
+                        Text(UTCtoClockTimeOnly(currentDate: Date(), format: "MM.YYYY"))
+                            .font(.caption)
+                            .foregroundColor(Color(UIColor.lightGray))
+                        }
+                    }.offset(x: 0, y: -80)
 
                 }
                 .frame(width: geometry.frame(in: .local).size.width, height: 200)
@@ -100,7 +136,6 @@ struct Line: View {
     public var body: some View {
         
         ZStack {
-            
             self.path
                 .stroke(data.first! < data.last! ? Color.green: Color.red ,style: StrokeStyle(lineWidth: 1.5, lineJoin: .round))
                 .rotationEffect(.degrees(180), anchor: .center)

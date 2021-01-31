@@ -4,7 +4,8 @@
 //
 //  Created by Никита Казанцев on 30.01.2021.
 //
-
+// Подробная информация о компании, ее акции, приходят с https://finnhub.io
+// Больше информации https://finnhub.io/docs/api/company-profile2
 
 import Foundation
 

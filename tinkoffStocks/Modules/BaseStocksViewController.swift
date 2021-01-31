@@ -19,18 +19,15 @@ class BaseStocksViewController: UIViewController {
     
     weak var coordinatorDelegate: StocksControllerCoordinatorDelegate?
     
-
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // colors
-        
         view.backgroundColor = .black
 
         // keyboard
-        
         setupKeyboardEvents()
     }
     
@@ -40,12 +37,13 @@ class BaseStocksViewController: UIViewController {
         print("Need to override this method")
     }
     
-    // MARK: - Private methods
-    
-    
-    //
-    // MARK: Keyboard Management
+    func showError(_ message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 
+    // MARK: Keyboard Management
     private func setupKeyboardEvents() {
 
         NotificationCenter.default.addObserver(

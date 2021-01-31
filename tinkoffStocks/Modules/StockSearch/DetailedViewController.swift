@@ -15,15 +15,17 @@ class DetailedViewController: BaseStocksViewController {
     // MARK: - UI
     var activityView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     
+    // передающиеся при инициализации вью значения
     var companySymbol: String!
     var companyName: String!
     
+    // верхняя секция с основной информацией об акции
     private var topLogo: UIImageView!
     private var topCompanySymbolLabel: UILabel!
     private var topCompanyFullNameLabel: UILabel!
     private var topCompanyCurrentPriceLabel: UILabel!
     
-    // Low high 52 week section
+    // Low high 52 week секция
     private var lowHighSection: UIView!
     
     private var lowSection: UIView!
@@ -34,16 +36,15 @@ class DetailedViewController: BaseStocksViewController {
     private var priceHighLabel: UILabel!
     private var priceHighDescLabel: UILabel!
     
-    //add to favourite button
+    //кнопка добавить в избранное
     private var favouriteButton: RoundedButton!
-    //more data about company
-    private var dataStackView: UIStackView = UIStackView()
     
+    //список с детальной информацией о компании. Иногда может отсутствовать
+    private var dataStackView: UIStackView = UIStackView()
     private var dataStackViewData: CompanyProfile?
     
     
-    private var descLabel1: UILabel!
-    
+    // Скрол вью, куда помещаются все элементы кроме главной информации об акции
     let scrollViewContainer: UIStackView = {
         let view = UIStackView()
         
@@ -62,7 +63,6 @@ class DetailedViewController: BaseStocksViewController {
     }()
     
     
-    
     init( companySymbol: String, companyName: String) {
             self.companySymbol = companySymbol
             self.companyName = companyName
@@ -79,19 +79,18 @@ class DetailedViewController: BaseStocksViewController {
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         
+        // отображаем начало подгрузки с бэка
         activityView.center = self.view.center
         self.view.addSubview(activityView)
         activityView.startAnimating()
         
-        print("Login")
-        super.viewDidLoad()
-        
+        // настраиваем UI
         setupUI()
         
-        //navigationController?.setNavigationBarHidden(true, animated: false)
+        // запрос инфы о компании с бэка
         requestCompany(for: companySymbol)
-        print("LOADING")
     }
     
     
@@ -100,44 +99,15 @@ class DetailedViewController: BaseStocksViewController {
     
     private func setupUI() {
         
-        // title
-        
-        
-        // subviews
-        
         addUpperView()
         
         addScrollView()
         
         addLowHigh52SectionView()
         
+        addFavouriteButtonView()
         
-        favouriteButton = RoundedButton(type: .system).then { nextButton in
-            
-            nextButton.setTitle("Add to favourite", for: .normal)
-            nextButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .regular)
-            nextButton.onTap { [unowned self] _ in
-                DispatchQueue.main.async {
-                    
-                }
-                
-            }
-            
-            addSubview(nextButton) {
-                $0.height.equalTo(55)
-                $0.centerX.equalToSuperview()
-                $0.bottomMargin.equalToSuperview().inset(16)
-                $0.width.equalToSuperview().multipliedBy(0.85)
-            }
-        }
-        
-        
-        let add = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(close))
-
-        navigationItem.rightBarButtonItems = [add]
-        
-        
-        
+        setupNavigationBarView()
     }
     
     func addUpperView() {
@@ -162,7 +132,6 @@ class DetailedViewController: BaseStocksViewController {
             topLabel.text = companySymbol
             topLabel.numberOfLines = 0
             topLabel.font = UIFont.systemFont(ofSize: 32, weight: .bold)
-            topLabel.textColor = UIColor.white
             
             addSubview(topLabel) {
                 $0.topMargin.equalTo(topLogo.snp.topMargin)
@@ -196,6 +165,7 @@ class DetailedViewController: BaseStocksViewController {
         }
     }
     
+    // секция, где отображаются минимумы-максимумы за 52 недели (так принято)
     func addLowHigh52SectionView() {
         lowHighSection = UIView()
         lowSection = UIView()
@@ -205,10 +175,8 @@ class DetailedViewController: BaseStocksViewController {
             dsLabel.text = "-"
             dsLabel.numberOfLines = 0
             dsLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
-            dsLabel.textColor = .white
             
             lowSection.addSubview(dsLabel) {
-                //$0.top.equalToSuperview().offset(12)
                 $0.left.equalToSuperview()
             }
         }
@@ -225,13 +193,10 @@ class DetailedViewController: BaseStocksViewController {
             }
         }
         
-        
-        
         priceHighLabel = UILabel().then { dsLabel in
             dsLabel.text = "-"
             dsLabel.numberOfLines = 0
             dsLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
-            dsLabel.textColor = .white
             
             highSection.addSubview(dsLabel) {
                 $0.left.equalToSuperview()
@@ -254,7 +219,6 @@ class DetailedViewController: BaseStocksViewController {
             $0.top.equalToSuperview()
             $0.left.equalToSuperview()
             $0.width.equalTo(100)
-            
         }
         
         lowHighSection.addSubview(highSection) {
@@ -269,46 +233,45 @@ class DetailedViewController: BaseStocksViewController {
         }
     }
     
+    // вывод подробной информации о компании
     func addDataStackView(_ data: CompanyProfile) {
         DispatchQueue.main.async {
             self.dataStackView.spacing = 30
             self.dataStackView.axis = .vertical
+
             for (key,value) in data.allProperties() {
-                
+                // пропускаем это поле, это выводить не нужно
                 if (key == "logo") {
                     continue
                 }
-                print(key,value)
                 let newView = UIView()
-                let newLabel = UILabel() // main label
-                let newLabel2 = UILabel() // desc label
                 
-                newLabel.text = key
-                newLabel.textColor = .white
+                let newLabel = UILabel() // main label
+                newLabel.text = key.capitalized
                 newLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
                 
+                let newLabel2 = UILabel() // desc label
+                newLabel2.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+                
+
+                // Смотрим, а не пришла ли нам пустота в одно из полей структуры
                 if let b = value as? [String: String]{
                     newLabel2.text = b["some"]
                 } else {
                     if let bb = value as? [String: Double] {
                         newLabel2.text = String(bb["some"]!)
                     } else {
+                        // если по данному полю пришла пустота - не выводим в UI данную строчку
                         continue
-                        //newLabel2.text = "-"
                     }
                 }
-                
-                print(value)
-                
-                newLabel2.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-                newLabel2.textColor = .white
                 
                 newView.addSubview(newLabel) {
                     $0.left.equalToSuperview()
                     $0.top.equalToSuperview()
                     $0.width.lessThanOrEqualToSuperview().multipliedBy(0.45)
                 }
-                
+                     
                 newView.addSubview(newLabel2) {
                     $0.right.equalToSuperview()
                     $0.top.equalToSuperview()
@@ -361,10 +324,36 @@ class DetailedViewController: BaseStocksViewController {
         scrollViewContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
     }
     
+    func addFavouriteButtonView() {
+        favouriteButton = RoundedButton(type: .system).then { nextButton in
+            
+            nextButton.setTitle("Add to favourite", for: .normal)
+            nextButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .regular)
+            nextButton.onTap { [unowned self] _ in
+                DispatchQueue.main.async {
+                    
+                }
+                
+            }
+            
+            addSubview(nextButton) {
+                $0.height.equalTo(55)
+                $0.centerX.equalToSuperview()
+                $0.bottomMargin.equalToSuperview().inset(16)
+                $0.width.equalToSuperview().multipliedBy(0.85)
+            }
+        }
+    }
+    
     func fillDetailedInformation() {
         if (self.dataStackViewData != nil ) {
             self.addDataStackView(self.dataStackViewData!)
         }
+    }
+    
+    func setupNavigationBarView() {
+        let add = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(close))
+        navigationItem.rightBarButtonItems = [add]
     }
     
     
@@ -386,8 +375,6 @@ class DetailedViewController: BaseStocksViewController {
             }
         }
         
-        // /stock/profile?symbol=AAPL
-        
         APIManager.sharedInstance.getRequest(modelType: CompanyProfile.self, url: "https://finnhub.io/api/v1/stock/profile2?symbol=\(companySymbol ?? "AAPL")&token=\(APIManager.sharedInstance.apiKey)") { result in
             switch result {
             case .success(let data):
@@ -400,9 +387,9 @@ class DetailedViewController: BaseStocksViewController {
                 }
             case .failure(let error):
                 do {
-                    print("\n\n\n\n\n\n")
-                    print(error)
-                    print("\n\n\n\n\n\n")
+                    DispatchQueue.main.async {
+                    self.showError(error.localizedDescription)
+                    }
                 }
             }
         }
@@ -438,6 +425,9 @@ class DetailedViewController: BaseStocksViewController {
                 self.activityView.stopAnimating()
                 
                 self.fillDetailedInformation()
+            }
+            else {
+                self.close()
             }
         }
     }

@@ -10,11 +10,14 @@ import SnapKit
 import Then
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
+class ViewController: BaseStocksViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  {
 
     // MARK: - UI
+    
+    // индикатор загрузки по сети
     var activityView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     
+    // сюда после нажатия кнопки Load More попадают акции, отдающиеся бэком
     private var myArray: [CompanyShortElement] = [CompanyShortElement(currency: "US", someDescription: "Apple inc", displaySymbol: "AAPL", figi: "BBG000BGHYF2", mic: "OTCM", symbol: "AAPL", type: "Common Stock"),
                                                   CompanyShortElement(currency: "US", someDescription: "Microsoft Corporation", displaySymbol: "MSFT", figi: "BBG1654BGHYS2", mic: "OTCM", symbol: "MSFT", type: "Common Stock"),
                                                   CompanyShortElement(currency: "US", someDescription: "Tesla Inc", displaySymbol: "TSLA", figi: "BBG001BGHYF2", mic: "OTCM", symbol: "TSLA", type: "Common Stock"),
@@ -23,36 +26,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                                   CompanyShortElement(currency: "US", someDescription: "Activision Blizzard, Inc.", displaySymbol: "ATVI", figi: "BBG001BGHYF3", mic: "OTCM", symbol: "ATVI", type: "Common Stock"),
                                                   ]
     
-
+    // только отфильтрованные акции (при использовании searchBar)
     private var filteredData: [CompanyShortElement]!
+    
+    // список, выводящий все акции, загруженные на устройстве
     private var myTableView: UITableView!
     
+    // строка поиска для быстрого поиска по акциям.
+    // Поиск осуществляется по названию компании
     var searchBar: UISearchBar! = UISearchBar()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if #available(iOS 13.0, *) {
-                // Always adopt a light interface style.
                 overrideUserInterfaceStyle = .dark
             }
         
-        self.title = "Stocks"
-        
-        self.navigationController?.navigationBar.prefersLargeTitles = false
-        self.navigationController?.hidesBarsOnSwipe = true
-        let loadMoreItem = UIBarButtonItem(title: "Load more", style: .plain, target: self, action: #selector(loadMore))
-        navigationItem.rightBarButtonItems = [loadMoreItem]
-        filteredData = myArray
+        setupNavigationBar()
 
-        //setupTopView()
+        filteredData = myArray
         
         setupSearchBar()
         
         setupTableView()
         
-        activityView.center = self.view.center
-        self.view.addSubview(activityView)
+        setupLoaderView()
         
         let tapOnScreen = UITapGestureRecognizer(target: self, action: #selector(closeEvent))
         tapOnScreen.cancelsTouchesInView = false
@@ -60,8 +59,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func setupTableView() {
-        
-        
         let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
@@ -80,17 +77,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
           }
     }
     
+    func setupLoaderView() {
+        activityView.center = self.view.center
+        self.view.addSubview(activityView)
+    }
+    
+    func setupNavigationBar() {
+        self.title = "Stocks"
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationController?.hidesBarsOnSwipe = true
+        let loadMoreItem = UIBarButtonItem(title: "Load more", style: .plain, target: self, action: #selector(loadMore))
+        navigationItem.rightBarButtonItems = [loadMoreItem]
+    }
+    
     func setupSearchBar() {
         searchBar.delegate = self
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.backgroundColor = .black
 
-        
         addSubview(searchBar) {
             $0.right.left.equalToSuperview()
             $0.top.equalTo(view.safeArea.top).offset(16)
-            //$0.bottom.equalToSuperview().inset(self.view.frame.height - 150)
         }
     }
     
@@ -115,6 +123,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             case .failure(let error):
                 do {
                     DispatchQueue.main.async {
+                        self.showError(error.localizedDescription)
                         self.activityView.stopAnimating()
                     }
                 }
@@ -154,8 +163,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if (self.filteredData[indexPath.row].someDescription != nil ) {
         cell.detailTextLabel!.text = "\(self.filteredData[indexPath.row].someDescription!)"
             cell.detailTextLabel!.textColor = .lightGray
-            
-            
         }
         cell.textLabel!.textColor = .white
         return cell
@@ -163,8 +170,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // фильтрация по совпадениям
         self.filteredData = self.myArray.filter({ $0.someDescription?.lowercased().hasPrefix(searchText.lowercased()) ?? false })
-        //change the condition as per your requirement......
         self.myTableView.reloadData()
     }
 

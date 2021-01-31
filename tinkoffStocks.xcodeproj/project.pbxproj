@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		80BC0A7625C6A0EA002728EA /* DateTimeExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC0A7525C6A0EA002728EA /* DateTimeExt.swift */; };
 		80C7000225C59CED00215C90 /* TappableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7000125C59CED00215C90 /* TappableButton.swift */; };
 		80C7000525C59D4300215C90 /* BigAreaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7000425C59D4300215C90 /* BigAreaButton.swift */; };
 		80C7000D25C59F7F00215C90 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7000C25C59F7F00215C90 /* ViewController.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		80BC0A7525C6A0EA002728EA /* DateTimeExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeExt.swift; sourceTree = "<group>"; };
 		80C7000125C59CED00215C90 /* TappableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableButton.swift; sourceTree = "<group>"; };
 		80C7000425C59D4300215C90 /* BigAreaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigAreaButton.swift; sourceTree = "<group>"; };
 		80C7000C25C59F7F00215C90 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,34 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		80C7002525C69C2200215C90 /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				80C7000425C59D4300215C90 /* BigAreaButton.swift */,
+				80C7000125C59CED00215C90 /* TappableButton.swift */,
+				80C7FFFE25C59CBF00215C90 /* RoundedButton.swift */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
+		80C7002625C69C3500215C90 /* StockSearch */ = {
+			isa = PBXGroup;
+			children = (
+				80C7000C25C59F7F00215C90 /* ViewController.swift */,
+				80C7FF8525C54B8D00215C90 /* DetailedViewController.swift */,
+			);
+			path = StockSearch;
+			sourceTree = "<group>";
+		};
+		80C7002725C69C4E00215C90 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				80C7002225C5EA8D00215C90 /* NewsCell.swift */,
+				80C7001F25C5E6B100215C90 /* NewsViewController.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
 		80C7FF7525C54B8D00215C90 = {
 			isa = PBXGroup;
 			children = (
@@ -122,11 +152,9 @@
 		80C7FFB925C5683200215C90 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				80C7FF8525C54B8D00215C90 /* DetailedViewController.swift */,
 				80C7FFD025C57AD300215C90 /* BaseStocksViewController.swift */,
-				80C7000C25C59F7F00215C90 /* ViewController.swift */,
-				80C7001F25C5E6B100215C90 /* NewsViewController.swift */,
-				80C7002225C5EA8D00215C90 /* NewsCell.swift */,
+				80C7002625C69C3500215C90 /* StockSearch */,
+				80C7002725C69C4E00215C90 /* News */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -136,6 +164,7 @@
 			children = (
 				80C7FFC625C56AF100215C90 /* UIViewSnapKitExt.swift */,
 				80C7FFE025C58D6C00215C90 /* UIImageViewExt.swift */,
+				80BC0A7525C6A0EA002728EA /* DateTimeExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -144,9 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				80C7FFD425C57BDF00215C90 /* ChartView.swift */,
-				80C7FFFE25C59CBF00215C90 /* RoundedButton.swift */,
-				80C7000125C59CED00215C90 /* TappableButton.swift */,
-				80C7000425C59D4300215C90 /* BigAreaButton.swift */,
+				80C7002525C69C2200215C90 /* Reusable */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -243,6 +270,7 @@
 				80C7002325C5EA8D00215C90 /* NewsCell.swift in Sources */,
 				80C7FFFF25C59CBF00215C90 /* RoundedButton.swift in Sources */,
 				80C7FF8225C54B8D00215C90 /* AppDelegate.swift in Sources */,
+				80BC0A7625C6A0EA002728EA /* DateTimeExt.swift in Sources */,
 				80C7001B25C5E56100215C90 /* NewsModel.swift in Sources */,
 				80C7FF8425C54B8D00215C90 /* SceneDelegate.swift in Sources */,
 				80C7002025C5E6B100215C90 /* NewsViewController.swift in Sources */,

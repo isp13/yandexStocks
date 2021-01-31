@@ -55,31 +55,31 @@ class NewsCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        // верхняя иконка в левом углу, характеризующая тип новости
         self.addSubview(SmallIconimage){im in
             im.left.equalToSuperview().offset(16)
             im.top.equalToSuperview().offset(8)
             im.width.height.equalTo(24)
             }
         
+        // вывод типа новости (бизнес, обычная)
         self.addSubview(smallLabel){label in
             label.left.equalTo(SmallIconimage.snp.right).offset(4)
             label.centerY.equalTo(SmallIconimage)
             }
         
+        // название статьи
         self.addSubview(NameLabel){label in
             label.left.equalToSuperview().offset(16)
             label.right.equalToSuperview().inset(16)
             label.top.equalTo(SmallIconimage.snp.bottom).offset(8)
             }
         
-        
-    
+        // картинка новости
         self.addSubview(Iconimage){ im in
             im.top.equalTo(NameLabel.snp.bottom).offset(8)
             im.width.equalToSuperview()
             im.height.equalTo(250)
-            
-            
         }
     }
     

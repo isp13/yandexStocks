@@ -4,10 +4,12 @@
 //
 //  Created by Никита Казанцев on 30.01.2021.
 //
+// Общие данные о финансах, приходят с https://finnhub.io
+// Больше информации https://finnhub.io/docs/api/company-basic-financials
 
 import Foundation
 
-// MARK: - Welcome
+// MARK: - BasicFinantials
 struct BasicFinantials: Codable {
     let series: Series
     let metric: Metric?
