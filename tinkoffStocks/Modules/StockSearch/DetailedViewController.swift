@@ -449,7 +449,6 @@ class DetailedViewController: BaseStocksViewController {
     
     private func updateMainData(_ data: BasicFinantials) {
         DispatchQueue.main.async {
-            //self.topCompanySymbolLabel.text = (String(data.metric?.s ?? 0))
             self.priceLowLabel.text = String(data.metric?.the52WeekLow ?? 0)
             self.priceHighLabel.text = String(data.metric?.the52WeekHigh ?? 0)
         }
