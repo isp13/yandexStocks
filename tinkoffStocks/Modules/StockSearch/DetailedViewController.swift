@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  tinkoffStocks
+//  Yandex Stocks
 //
-//  Created by Никита Казанцев on 30.01.2021.
+//  Created by Никита Казанцев on 28.03.2021.
 //
 // Детальное описание акции с выводом графика и кучей информации в виде лейблов
 
@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 import SnapKit
 import Then
+import FinnhubSwift
 
 class DetailedViewController: BaseStocksViewController {
     
@@ -65,10 +66,10 @@ class DetailedViewController: BaseStocksViewController {
     
     
     init( companySymbol: String, companyName: String) {
-            self.companySymbol = companySymbol
-            self.companyName = companyName
-            super.init(nibName: nil, bundle: nil)
-        }
+        self.companySymbol = companySymbol
+        self.companyName = companyName
+        super.init(nibName: nil, bundle: nil)
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -92,6 +93,47 @@ class DetailedViewController: BaseStocksViewController {
         
         // запрос инфы о компании с бэка
         requestCompany(for: companySymbol)
+        
+        // сокет с обновлением цены акции
+        socketConnect()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        FinnhubLiveClient.shared.closeConnection()
+    }
+    
+    func socketConnect() {
+
+        FinnhubLiveClient.shared.subscribe(symbol: companySymbol)
+        FinnhubLiveClient.shared.receiveMessage { result in
+            switch result {
+            case let .success(success):
+                switch success {
+                case let .trades(trades):
+                    DispatchQueue.main.async {
+                        self.topCompanyCurrentPriceLabel.text = String(format: "%.3f",trades.data.first?.p ?? 0) ////DispatchQueue.main.async {
+                    }
+                case let .news(news):
+                    print(news)
+                case let .ping(ping):
+                    print(ping)
+                case .empty:
+                    print("Empty data")
+                }
+            case let .failure(failure):
+                switch failure {
+                case .networkFailure:
+                    print(failure)
+                case .invalidData:
+                    print("Invalid data")
+                case .unknownFailure:
+                    print("Unknown failure")
+                }
+            }
+        }
+        
+        
     }
     
     
@@ -123,7 +165,7 @@ class DetailedViewController: BaseStocksViewController {
             uiimageview.clipsToBounds = true
             
             addSubview(uiimageview) {
-                $0.topMargin.equalToSuperview().offset(32)
+                $0.top.equalToSuperview().offset(32)
                 $0.left.equalToSuperview().offset(16)
                 $0.width.height.equalTo(32)
             }
@@ -131,12 +173,13 @@ class DetailedViewController: BaseStocksViewController {
         
         topCompanySymbolLabel = UILabel().then { topLabel in
             topLabel.text = companySymbol
-            topLabel.numberOfLines = 0
+            topLabel.numberOfLines = 1
             topLabel.font = UIFont.systemFont(ofSize: 32, weight: .bold)
             
             addSubview(topLabel) {
-                $0.topMargin.equalTo(topLogo.snp.topMargin)
+                $0.top.equalTo(topLogo.snp.top)
                 $0.left.equalTo(topLogo.snp.right).offset(4)
+                $0.height.equalTo(topLogo.snp.height)
             }
         }
         
@@ -147,9 +190,9 @@ class DetailedViewController: BaseStocksViewController {
             topLabel.textColor = .lightGray
             
             addSubview(topLabel) {
-                $0.centerY.equalTo(topCompanySymbolLabel.snp.centerY)
-                $0.left.equalTo(topCompanySymbolLabel.snp.right).offset(16)
-                $0.right.equalToSuperview().inset(16)
+                $0.top.equalTo(topCompanySymbolLabel.snp.bottom)
+                $0.left.equalToSuperview().offset(16)
+                $0.height.equalTo(topLogo.snp.height)
             }
         }
         
@@ -160,15 +203,15 @@ class DetailedViewController: BaseStocksViewController {
             topLabel.textColor = .lightGray
             
             addSubview(topLabel) {
-                $0.top.equalTo(topCompanySymbolLabel.snp.bottom).offset(4)
+                $0.top.equalTo(topCompanyFullNameLabel.snp.bottom).offset(4)
                 $0.left.equalToSuperview().offset(16)
             }
         }
     }
     
     /**
- секция, где отображаются минимумы-максимумы за 52 недели (так принято)
- */
+     секция, где отображаются минимумы-максимумы за 52 недели (так принято)
+     */
     func addLowHigh52SectionView() {
         lowHighSection = UIView()
         lowSection = UIView()
@@ -220,7 +263,7 @@ class DetailedViewController: BaseStocksViewController {
         
         lowHighSection.addSubview(lowSection) {
             $0.top.equalToSuperview()
-            $0.left.equalToSuperview()
+            $0.left.equalToSuperview().offset(16)
             $0.width.equalTo(100)
         }
         
@@ -230,22 +273,22 @@ class DetailedViewController: BaseStocksViewController {
         }
         
         scrollViewContainer.addArrangedSubview(lowHighSection) {
-            $0.top.equalToSuperview().offset(8)
-            $0.left.equalToSuperview().offset(16)
+            //$0.top.equalToSuperview().offset(8)
+            //            $0.left.equalToSuperview().offset(16)
             $0.height.equalTo(50)
         }
     }
     
     /**
      вывод в UI подробной информации о компании
-
+     
      - Parameter data: объект структуры компании
      */
     func addDataStackView(_ data: CompanyProfile) {
         DispatchQueue.main.async {
             self.dataStackView.spacing = 30
             self.dataStackView.axis = .vertical
-
+            
             for (key,value) in data.allProperties() {
                 // пропускаем это поле, это выводить не нужно
                 if (key == "logo") {
@@ -260,7 +303,7 @@ class DetailedViewController: BaseStocksViewController {
                 let newLabel2 = UILabel() // desc label
                 newLabel2.font = UIFont.systemFont(ofSize: 13, weight: .regular)
                 
-
+                
                 // Смотрим, а не пришла ли нам пустота в одно из полей структуры
                 if let b = value as? [String: String]{
                     newLabel2.text = b["some"]
@@ -274,13 +317,13 @@ class DetailedViewController: BaseStocksViewController {
                 }
                 
                 newView.addSubview(newLabel) {
-                    $0.left.equalToSuperview()
+                    $0.left.equalToSuperview().offset(16)
                     $0.top.equalToSuperview()
                     $0.width.lessThanOrEqualToSuperview().multipliedBy(0.45)
                 }
-                     
+                
                 newView.addSubview(newLabel2) {
-                    $0.right.equalToSuperview()
+                    $0.right.equalToSuperview().inset(16)
                     $0.top.equalToSuperview()
                     $0.width.lessThanOrEqualToSuperview().multipliedBy(0.45)
                 }
@@ -300,15 +343,11 @@ class DetailedViewController: BaseStocksViewController {
             }
             
             
-            self.scrollViewContainer.addArrangedSubview(self.dataStackView) {
-                $0.left.equalToSuperview().offset(16)
-                $0.right.equalToSuperview().inset(16)
-            }
+            self.scrollViewContainer.addArrangedSubview(self.dataStackView)
             
             
             let tmpView = UIView()
             self.scrollViewContainer.addArrangedSubview(tmpView) {
-                $0.left.equalToSuperview().offset(16)
                 $0.height.equalTo(250)
             }
         }
@@ -334,14 +373,8 @@ class DetailedViewController: BaseStocksViewController {
     func addFavouriteButtonView() {
         favouriteButton = RoundedButton(type: .system).then { nextButton in
             
-            nextButton.setTitle("Add to favourite", for: .normal)
+            nextButton.setTitle("Buy", for: .normal)
             nextButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .regular)
-//            nextButton.onTap { [unowned self] _ in
-//                DispatchQueue.main.async {
-//                    
-//                }
-//                
-//            }
             
             addSubview(nextButton) {
                 $0.height.equalTo(55)
@@ -366,38 +399,46 @@ class DetailedViewController: BaseStocksViewController {
     
     /**
      собираем метрику компании с бэка
-
+     
      - Parameter company: какую компанию нужно проанализировать.
      */
     private func requestCompany(for company: String) {
-        APIManager.sharedInstance.getRequest(modelType: BasicFinantials.self, url: "https://finnhub.io/api/v1/stock/metric?symbol=\(company)&metric=all&token=\(APIManager.sharedInstance.apiKey)") { result in
+        APIManager.sharedInstance.getRequest(modelType: BasicFinantials.self, url: "https://finnhub.io/api/v1/stock/metric?symbol=\(company)&metric=all") { result in
             switch result {
             case .success(let data): self.updateMainData(data)
-            case .failure(let error): print(error)
+            case .failure(let error):
+                do {
+                    DispatchQueue.main.async {
+                        self.showError(error.localizedDescription)
+                    }
+                }
             }
         }
         
-        APIManager.sharedInstance.getRequest(modelType: StockPrice.self, url: "https://finnhub.io/api/v1/stock/candle?symbol=\(company)&resolution=D&from=\(Int(Calendar.current.date(byAdding: .day, value: -365, to: Date())!.timeIntervalSince1970))&to=\(Int(Date().timeIntervalSince1970))&token=\(APIManager.sharedInstance.apiKey)") { result in
+        APIManager.sharedInstance.getRequest(modelType: StockPrice.self, url: "https://finnhub.io/api/v1/stock/candle?symbol=\(company)&resolution=D&from=\(Int(Calendar.current.date(byAdding: .day, value: -365, to: Date())!.timeIntervalSince1970))&to=\(Int(Date().timeIntervalSince1970))") { result in
             switch result {
             case .success(let data): self.loadChart(data)
-            case .failure(let error): print(error)
+            case .failure(let error):
+                do {
+                    DispatchQueue.main.async {
+                        self.showError(error.localizedDescription)
+                    }
+                }
             }
         }
         
-        APIManager.sharedInstance.getRequest(modelType: CompanyProfile.self, url: "https://finnhub.io/api/v1/stock/profile2?symbol=\(companySymbol ?? "AAPL")&token=\(APIManager.sharedInstance.apiKey)") { result in
+        APIManager.sharedInstance.getRequest(modelType: CompanyProfile.self, url: "https://finnhub.io/api/v1/stock/profile2?symbol=\(companySymbol ?? "")") { result in
             switch result {
             case .success(let data):
                 do {
-                    print("\n\n\n\n\n\n")
                     print(data)
-                    print("\n\n\n\n\n\n")
                     self.updateImage(data)
                     self.dataStackViewData = data
                 }
             case .failure(let error):
                 do {
                     DispatchQueue.main.async {
-                    self.showError(error.localizedDescription)
+                        self.showError(error.localizedDescription)
                     }
                 }
             }
@@ -405,17 +446,17 @@ class DetailedViewController: BaseStocksViewController {
     }
     
     private func updateImage(_ data: CompanyProfile) {
-        if (data.logo != nil) {
-        DispatchQueue.main.async {
-            self.topLogo.loadImageUsingCacheWithURLString(data.logo!, placeHolder: UIImage())
-        }
+        if let logo = data.logo  {
+            DispatchQueue.main.async {
+                self.topLogo.loadImageUsingCacheWithURLString(logo, placeHolder: UIImage())
+            }
         }
     }
     
     
     /**
      выводит график на экран если он доступен
-
+     
      - Parameter data: данные о цене акции за все время.
      */
     private func loadChart(_ data: StockPrice) {
@@ -430,9 +471,6 @@ class DetailedViewController: BaseStocksViewController {
                 
                 self.scrollViewContainer.addArrangedSubview(childView.view)
                 {
-                    $0.top.equalTo(self.lowHighSection.snp.bottom).offset(40)
-                    $0.left.equalToSuperview().offset(16)
-                    $0.right.equalToSuperview().inset(16)
                     $0.height.equalTo(200)
                 }
                 childView.didMove(toParent: self)
@@ -456,7 +494,7 @@ class DetailedViewController: BaseStocksViewController {
     
     @objc func close() {
         self.dismiss(animated: true, completion: nil)
-      }
+    }
 }
 
 

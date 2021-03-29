@@ -1,8 +1,8 @@
 //
 //  apiModels.swift
-//  tinkoffStocks
+//  Yandex Stocks
 //
-//  Created by Никита Казанцев on 30.01.2021.
+//  Created by Никита Казанцев on 28.03.2021.
 //
 // Общие данные о финансах, приходят с https://finnhub.io
 // Больше информации https://finnhub.io/docs/api/company-basic-financials

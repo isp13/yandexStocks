@@ -1,8 +1,8 @@
 //
 //  TappableButton.swift
-//  tinkoffStocks
+//  Yandex Stocks
 //
-//  Created by Никита Казанцев on 30.01.2021.
+//  Created by Никита Казанцев on 28.03.2021.
 //
 
 

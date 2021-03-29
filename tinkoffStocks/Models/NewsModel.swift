@@ -1,15 +1,14 @@
 //
 //  NewsModel.swift
-//  tinkoffStocks
+//  Yandex Stocks
 //
-//  Created by Никита Казанцев on 30.01.2021.
+//  Created by Никита Казанцев on 28.03.2021.
 //
 // Новости рынков, как-то коррелирующие с акциями, приходят с https://finnhub.io
 // Больше информации https://finnhub.io/docs/api/market-news
 
 import Foundation
 
-// MARK: - WelcomeElement
 struct NewsElement: Codable {
     let category: String?
     let datetime: Int?

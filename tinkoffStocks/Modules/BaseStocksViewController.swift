@@ -1,8 +1,8 @@
 //
 //  BaseStocksViewController.swift
-//  tinkoffStocks
+//  Yandex Stocks
 //
-//  Created by Никита Казанцев on 30.01.2021.
+//  Created by Никита Казанцев on 28.03.2021.
 //
 // класс родителель для общих настроек контроллеров
 
@@ -37,7 +37,7 @@ class BaseStocksViewController: UIViewController {
     // MARK: - Public methods
     
     func updateUIForKeyboardPresented(_ presented: Bool, frame: CGRect) {
-        print("Need to override this method")
+//        print("Need to override this method")
     }
     
     func showError(_ message: String) {

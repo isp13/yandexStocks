@@ -1,8 +1,8 @@
 //
 //  NewsViewController.swift
-//  tinkoffStocks
+//  Yandex Stocks
 //
-//  Created by Никита Казанцев on 30.01.2021.
+//  Created by Никита Казанцев on 28.03.2021.
 //
 // контроллер с таблицей где выводятся новости как-то связанные с рынком акций (влияющих на них косвенно или прямо)
 import UIKit
@@ -92,7 +92,7 @@ class NewsViewController: BaseStocksViewController, UITableViewDelegate, UITable
      загружает новости с бэка
      */
     func loadNews() {
-        APIManager.sharedInstance.getRequest(modelType: [NewsElement].self, url: "https://finnhub.io/api/v1/news?category=general&token=\(APIManager.sharedInstance.apiKey)") { result in
+        APIManager.sharedInstance.getRequest(modelType: [NewsElement].self, url: "https://finnhub.io/api/v1/news?category=general") { result in
             switch result {
             case .success(let data):
                 do {

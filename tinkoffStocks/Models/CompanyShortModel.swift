@@ -1,8 +1,8 @@
 //
 //  CompanyShortModel.swift
-//  tinkoffStocks
+//  Yandex Stocks
 //
-//  Created by Никита Казанцев on 30.01.2021.
+//  Created by Никита Казанцев on 28.03.2021.
 //
 // Общие данные о компании, приходят с https://finnhub.io
 // Больше информации https://finnhub.io/docs/api/stock-symbols
@@ -10,7 +10,7 @@
 import Foundation
 import RealmSwift
 
-// MARK: - WelcomeElement
+
 class CompanyShortElement: Object, Codable  {
     @objc dynamic var currency, someDescription, displaySymbol, figi: String?
     @objc dynamic var mic, symbol, type: String?

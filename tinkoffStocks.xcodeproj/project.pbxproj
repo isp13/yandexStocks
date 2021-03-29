@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		80447A03260F9E8500E0926C /* FinnhubSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 80447A02260F9E8500E0926C /* FinnhubSwift */; };
+		80447A06260FA02D00E0926C /* Finnhub-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 80447A05260FA02D00E0926C /* Finnhub-Info.plist */; };
+		80A6068C25F5102E00816973 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A6068B25F5102E00816973 /* StringExt.swift */; };
 		80BC0A7625C6A0EA002728EA /* DateTimeExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC0A7525C6A0EA002728EA /* DateTimeExt.swift */; };
 		80BC0A7A25C6B43B002728EA /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 80BC0A7925C6B43B002728EA /* Realm */; };
 		80BC0A7C25C6B43B002728EA /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 80BC0A7B25C6B43B002728EA /* RealmSwift */; };
@@ -18,6 +21,7 @@
 		80C7001B25C5E56100215C90 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7001A25C5E56100215C90 /* NewsModel.swift */; };
 		80C7002025C5E6B100215C90 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7001F25C5E6B100215C90 /* NewsViewController.swift */; };
 		80C7002325C5EA8D00215C90 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7002225C5EA8D00215C90 /* NewsCell.swift */; };
+		80C79930260F3C340046E4CC /* QuoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7992F260F3C340046E4CC /* QuoteModel.swift */; };
 		80C7FF8225C54B8D00215C90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FF8125C54B8D00215C90 /* AppDelegate.swift */; };
 		80C7FF8425C54B8D00215C90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FF8325C54B8D00215C90 /* SceneDelegate.swift */; };
 		80C7FF8625C54B8D00215C90 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C7FF8525C54B8D00215C90 /* DetailedViewController.swift */; };
@@ -38,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		80447A05260FA02D00E0926C /* Finnhub-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Finnhub-Info.plist"; sourceTree = "<group>"; };
+		80A6068B25F5102E00816973 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		80BC0A7525C6A0EA002728EA /* DateTimeExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeExt.swift; sourceTree = "<group>"; };
 		80BC0A7E25C6B59A002728EA /* StockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCell.swift; sourceTree = "<group>"; };
 		80C7000125C59CED00215C90 /* TappableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableButton.swift; sourceTree = "<group>"; };
@@ -47,6 +53,7 @@
 		80C7001A25C5E56100215C90 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		80C7001F25C5E6B100215C90 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		80C7002225C5EA8D00215C90 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		80C7992F260F3C340046E4CC /* QuoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteModel.swift; sourceTree = "<group>"; };
 		80C7FF7E25C54B8D00215C90 /* tinkoffStocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tinkoffStocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80C7FF8125C54B8D00215C90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		80C7FF8325C54B8D00215C90 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +80,7 @@
 			files = (
 				80BC0A7C25C6B43B002728EA /* RealmSwift in Frameworks */,
 				80BC0A7A25C6B43B002728EA /* Realm in Frameworks */,
+				80447A03260F9E8500E0926C /* FinnhubSwift in Frameworks */,
 				80C7FFBE25C5692800215C90 /* SnapKit in Frameworks */,
 				80C7FFC325C56A9300215C90 /* Then in Frameworks */,
 			);
@@ -89,6 +97,7 @@
 				80C7FFD925C5842100215C90 /* StockPriceModel.swift */,
 				80C7FFDC25C58AAF00215C90 /* CompanyProfileModel.swift */,
 				80C7001A25C5E56100215C90 /* NewsModel.swift */,
+				80C7992F260F3C340046E4CC /* QuoteModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -152,6 +161,7 @@
 				80C7FF8A25C54B8E00215C90 /* Assets.xcassets */,
 				80C7FF8C25C54B8E00215C90 /* LaunchScreen.storyboard */,
 				80C7FF8F25C54B8E00215C90 /* Info.plist */,
+				80447A05260FA02D00E0926C /* Finnhub-Info.plist */,
 			);
 			path = tinkoffStocks;
 			sourceTree = "<group>";
@@ -172,6 +182,7 @@
 				80C7FFC625C56AF100215C90 /* UIViewSnapKitExt.swift */,
 				80C7FFE025C58D6C00215C90 /* UIImageViewExt.swift */,
 				80BC0A7525C6A0EA002728EA /* DateTimeExt.swift */,
+				80A6068B25F5102E00816973 /* StringExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -206,6 +217,7 @@
 				80C7FFC225C56A9300215C90 /* Then */,
 				80BC0A7925C6B43B002728EA /* Realm */,
 				80BC0A7B25C6B43B002728EA /* RealmSwift */,
+				80447A02260F9E8500E0926C /* FinnhubSwift */,
 			);
 			productName = tinkoffStocks;
 			productReference = 80C7FF7E25C54B8D00215C90 /* tinkoffStocks.app */;
@@ -238,6 +250,7 @@
 				80C7FFBC25C5692800215C90 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				80C7FFC125C56A9300215C90 /* XCRemoteSwiftPackageReference "Then" */,
 				80BC0A7825C6B43B002728EA /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				80447A01260F9E8500E0926C /* XCRemoteSwiftPackageReference "FinnhubSwift" */,
 			);
 			productRefGroup = 80C7FF7F25C54B8D00215C90 /* Products */;
 			projectDirPath = "";
@@ -256,6 +269,7 @@
 				80C7FF8E25C54B8E00215C90 /* LaunchScreen.storyboard in Resources */,
 				80C7FF8B25C54B8E00215C90 /* Assets.xcassets in Resources */,
 				80C7FF8925C54B8D00215C90 /* Main.storyboard in Resources */,
+				80447A06260FA02D00E0926C /* Finnhub-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,8 +292,10 @@
 				80C7000525C59D4300215C90 /* BigAreaButton.swift in Sources */,
 				80C7000225C59CED00215C90 /* TappableButton.swift in Sources */,
 				80C7001525C5A89600215C90 /* CompanyShortModel.swift in Sources */,
+				80A6068C25F5102E00816973 /* StringExt.swift in Sources */,
 				80C7002325C5EA8D00215C90 /* NewsCell.swift in Sources */,
 				80C7FFFF25C59CBF00215C90 /* RoundedButton.swift in Sources */,
+				80C79930260F3C340046E4CC /* QuoteModel.swift in Sources */,
 				80C7FF8225C54B8D00215C90 /* AppDelegate.swift in Sources */,
 				80BC0A7625C6A0EA002728EA /* DateTimeExt.swift in Sources */,
 				80C7001B25C5E56100215C90 /* NewsModel.swift in Sources */,
@@ -440,10 +456,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nickyapp.tinkoffStocks;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickyapp.yandexStocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -459,10 +475,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nickyapp.tinkoffStocks;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickyapp.yandexStocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -490,6 +506,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		80447A01260F9E8500E0926C /* XCRemoteSwiftPackageReference "FinnhubSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kurtmcintire/FinnhubSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 		80BC0A7825C6B43B002728EA /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa";
@@ -517,6 +541,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		80447A02260F9E8500E0926C /* FinnhubSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 80447A01260F9E8500E0926C /* XCRemoteSwiftPackageReference "FinnhubSwift" */;
+			productName = FinnhubSwift;
+		};
 		80BC0A7925C6B43B002728EA /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 80BC0A7825C6B43B002728EA /* XCRemoteSwiftPackageReference "realm-cocoa" */;

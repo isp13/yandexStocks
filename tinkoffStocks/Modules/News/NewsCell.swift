@@ -1,8 +1,8 @@
 //
 //  NewsCell.swift
-//  tinkoffStocks
+//  Yandex Stocks
 //
-//  Created by Никита Казанцев on 30.01.2021.
+//  Created by Никита Казанцев on 28.03.2021.
 //
 // Ячейка, использующаяся в при выводе новостей
 // вывод названия новости, картинки
@@ -93,6 +93,12 @@ class NewsCell: UITableViewCell {
         DispatchQueue.main.async {
             self.Iconimage.loadImageUsingCacheWithURLString(url, placeHolder: UIImage())
         }
+    }
+    
+    override func prepareForReuse() {
+        NameLabel.text = ""
+        smallLabel.text = ""
+        Iconimage.image = UIImage()
     }
 
 }
